@@ -1,13 +1,18 @@
 #pragma once
 
+#include <joyctrl/foreground_window.hpp>
+
+#include <string>
+#include <vector>
+
 namespace joyctrl
 {
-namespace cfg
+namespace config
 {
 class Action
 {
   public:
-    virtual void start() = 0;
+    virtual void start(ForegroundWindow &fg_window) = 0;
 };
 }
 }

@@ -35,14 +35,14 @@ void JoystickHandler::runOnIndex(int index, Configuration &config)
                     if (app_config.searchRegex(title))
                     {
                         log::debug("matched regex \'%s\' for app %s (window title: %s)", app_config.getRegexString().c_str(), exe.c_str(), title.c_str());
-                        app_config.checkCurrentState(joystick);
+                        app_config.checkCurrentState(joystick, fg_window);
                     }
                 }
             }
         }
 
 #ifdef _WIN32
-        Sleep(1000);
+        Sleep(50);
 #else
 #endif
 

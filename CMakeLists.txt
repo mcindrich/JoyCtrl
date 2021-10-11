@@ -18,21 +18,21 @@ add_executable(
     
     "src/joyctrl.cpp"
     "src/joyctrl/log.cpp"
-    "src/joyctrl/joystick_handler.hpp" 
+    
     "src/joyctrl/joystick_handler.cpp" 
-    "src/joyctrl/configuration.hpp" 
-    "src/joyctrl/configuration/application_configuration.hpp" 
+    
     "src/joyctrl/configuration.cpp" 
     "src/joyctrl/configuration/application_configuration.cpp" 
-    "src/joyctrl/configuration/button_configuration.hpp" 
-    "src/joyctrl/configuration/button_combination.hpp" 
+    
     "src/joyctrl/configuration/button_combination.cpp" 
-    "src/joyctrl/configuration/action.hpp" 
-    "src/joyctrl/configuration/action_parser.hpp" 
+    
     "src/joyctrl/configuration/action_parser.cpp" 
     "src/joyctrl/joystick.cpp"
     "src/joyctrl/foreground_window.cpp"
- )
+      
+      
+      "src/joyctrl/configuration/action/key_down.cpp"
+)
 
 if(WIN32)
 target_link_libraries(

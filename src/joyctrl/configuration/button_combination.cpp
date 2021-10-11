@@ -1,5 +1,6 @@
 #include <joyctrl/configuration/button_combination.hpp>
 #include <joyctrl/log.hpp>
+#include <joyctrl/utils.hpp>
 
 #include <list>
 #include <array>
@@ -9,11 +10,8 @@
 
 namespace joyctrl
 {
-namespace cfg
+namespace config
 {
-template <int N_DELIMS>
-static std::list<std::string> splitStringByDelimiters(const std::string &str, std::array<char, N_DELIMS> delims);
-
 ButtonCombination::ButtonCombination(const std::string &combo) : mCombinationString(combo)
 {
     const std::array combo_symbols = {'+', '-'};
@@ -35,7 +33,7 @@ ButtonCombination::ButtonCombination(const std::string &combo) : mCombinationStr
     std::stack<std::shared_ptr<AST::Node>> node_stack;
     std::stack<std::string> combo_stack;
 
-    auto tokens = splitStringByDelimiters(combo, combo_symbols);
+    auto tokens = utils::splitStringByDelimiters(combo, combo_symbols);
 
     for (auto &tok : tokens)
     {
@@ -160,44 +158,5 @@ void ButtonCombination::printNode(const std::shared_ptr<AST::Node> &node, int in
         printNode(node->Right, indent + 1);
     }
 }
-
-template <int N_DELIMS>
-static std::list<std::string> splitStringByDelimiters(const std::string &str, std::array<char, N_DELIMS> delims)
-{
-    size_t curr_index = 0;
-    size_t last_index = 0;
-    std::list<std::string> tokens;
-
-    auto is_delimiter = [&delims](char c) {
-        for (auto iter : delims)
-        {
-            if (iter == c)
-            {
-                return true;
-            }
-        }
-        return false;
-    };
-
-    for (; curr_index < str.size(); curr_index++)
-    {
-        if (is_delimiter(str[curr_index]))
-        {
-            if (curr_index - last_index > 0)
-            {
-                tokens.push_back(str.substr(last_index, curr_index - last_index));
-                tokens.push_back(std::string(1, str[curr_index]));
-            }
-            last_index = curr_index + 1;
-        }
-    }
-
-    if (curr_index - last_index)
-    {
-        tokens.push_back(str.substr(last_index, curr_index - last_index));
-    }
-
-    return tokens;
-}
-} // namespace cfg
+} // namespace config
 }

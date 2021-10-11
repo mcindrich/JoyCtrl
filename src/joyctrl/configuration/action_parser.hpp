@@ -7,7 +7,7 @@
 
 namespace joyctrl
 {
-namespace cfg
+namespace config
 {
 class ActionParser
 {

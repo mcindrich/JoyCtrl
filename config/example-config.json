@@ -8,19 +8,23 @@
           "button_combinations": [
             {
               "combination": "A",
-              "action": "KeySim Enter"
+              "action": "KeyDown Enter"
             },
             {
               "combination": "LS+RS",
-              "action": "KeySim F11"
+              "action": "KeyDown F11"
             },
             {
               "combination": "DPadUp",
-              "action": "KeySim Up"
+              "action": "KeyDown Up"
             },
             {
               "combination": "DPadDown",
-              "action": "KeySim Down"
+              "action": "KeyDown Down"
+            },
+            {
+              "combination": "LB",
+              "action":  "KeyDown VolumeDown"
             }
           ]
         }

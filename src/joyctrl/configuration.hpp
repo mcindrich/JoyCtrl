@@ -11,7 +11,7 @@ namespace joyctrl
 {
 struct Configuration
 {
-    std::map<std::string, std::list<cfg::ApplicationConfiguration>> Apps;
+    std::map<std::string, std::list<config::ApplicationConfiguration>> Apps;
 
     Configuration();
 

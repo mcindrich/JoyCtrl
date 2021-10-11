@@ -6,7 +6,7 @@
 
 namespace joyctrl
 {
-namespace cfg
+namespace config
 {
 ApplicationConfiguration::ApplicationConfiguration(const nlohmann::json &j)
 {
@@ -26,7 +26,7 @@ bool ApplicationConfiguration::searchRegex(const std::string &str)
 {
     return std::regex_search(str, mRegex);
 }
-void ApplicationConfiguration::checkCurrentState(Joystick &joystick)
+void ApplicationConfiguration::checkCurrentState(Joystick &joystick, ForegroundWindow &fg_window)
 {
     // button combinations
     for (auto &button_config : mButtonConfigurations)
@@ -36,7 +36,7 @@ void ApplicationConfiguration::checkCurrentState(Joystick &joystick)
             log::debug("combination \'%s\' matched - executing action from the configuration file", button_config.Combination.getCombinationString().c_str());
             if (button_config.ActionPtr)
             {
-                button_config.ActionPtr->start();
+                button_config.ActionPtr->start(fg_window);
             }
         }
     }

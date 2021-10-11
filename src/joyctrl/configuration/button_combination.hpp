@@ -8,7 +8,7 @@
 
 namespace joyctrl
 {
-namespace cfg
+namespace config
 {
 namespace AST
 {
@@ -85,5 +85,5 @@ class ButtonCombination
     std::shared_ptr<AST::Node> mRootNode;
     std::string mCombinationString;
 };
-} // namespace cfg
+} // namespace config
 } // namespace joyctrl

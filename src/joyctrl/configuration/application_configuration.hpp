@@ -9,7 +9,7 @@
 
 namespace joyctrl
 {
-namespace cfg
+namespace config
 {
 class ApplicationConfiguration
 {
@@ -18,7 +18,7 @@ class ApplicationConfiguration
 
     bool searchRegex(const std::string &str);
 
-    void checkCurrentState(Joystick &joystick);
+    void checkCurrentState(Joystick &joystick, ForegroundWindow &fg_window);
 
     const std::string getRegexString() const;
 

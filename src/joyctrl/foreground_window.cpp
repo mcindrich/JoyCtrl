@@ -45,6 +45,14 @@ std::string ForegroundWindow::getWindowExe() const
     return exe;
 }
 
+void ForegroundWindow::simulateKeyDown(VirtualKey vk)
+{
+#ifdef _WIN32
+    PostMessage(mForegroundWindowHandle, WM_KEYDOWN, (WPARAM)vk, 0);
+#else
+#endif
+}
+
 void ForegroundWindow::refresh()
 {
 #ifdef _WIN32

@@ -13,7 +13,7 @@ void Configuration::createFromJSON(const nlohmann::json &j)
     {
         for (auto &single_regex : app.second)
         {
-            this->Apps[app.first].push_back(cfg::ApplicationConfiguration(single_regex));
+            this->Apps[app.first].push_back(config::ApplicationConfiguration(single_regex));
         }
     }
 }
