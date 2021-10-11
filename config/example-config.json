@@ -1,0 +1,30 @@
+{
+  "applications": {
+    "msedge.exe": [
+      {
+        "regex": "\\w*.pdf",
+        "comment": "Configuration for browser PDF files reading",
+        "configuration": {
+          "button_combinations": [
+            {
+              "combination": "A",
+              "action": "KeySim Enter"
+            },
+            {
+              "combination": "LS+RS",
+              "action": "KeySim F11"
+            },
+            {
+              "combination": "DPadUp",
+              "action": "KeySim Up"
+            },
+            {
+              "combination": "DPadDown",
+              "action": "KeySim Down"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
