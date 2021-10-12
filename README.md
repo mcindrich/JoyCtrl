@@ -16,8 +16,11 @@ Application currently runs only on Windows. Linux platform support is in progres
 Configurations are defined using the ```.json``` file format. Examples can be found in the ```config``` folder.
 For each application, one can define multiple configurations based on the current window title using a regex pattern. For example, if one wishes to define a configuration for Microsoft Edge application while the ```.pdf``` file is opened, one can specify regex ```\w*.pdf```.
 
----
+
 ![Application Start](assets/app-start.png)
+
+### Usage example
+![Application Start](assets/usage-example.gif)
 
 Once the app is started, it starts recording window activity and watches for the applications defined in the configuration.
 ## Examples
