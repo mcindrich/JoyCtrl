@@ -1,6 +1,8 @@
 #include <joyctrl/configuration.hpp>
 #include <joyctrl/log.hpp>
 
+#include <iostream>
+
 namespace joyctrl
 {
 Configuration::Configuration()
@@ -17,4 +19,15 @@ void Configuration::createFromJSON(const nlohmann::json &j)
         }
     }
 }
+void Configuration::createFromTOML(const toml::value &table)
+{
+    auto apps = toml::find(table, "apps");
+    for (auto &app : apps.as_array())
+    {
+        for (auto &reg : toml::find<toml::array>(app, "regex"))
+        {
+            this->Apps[toml::find<std::string>(app, "name")].push_back(config::ApplicationConfiguration(reg));
+        }
+    }
 }
+} // namespace joyctrl

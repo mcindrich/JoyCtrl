@@ -6,6 +6,7 @@
 #include <string>
 
 #include <nlohmann/json.hpp>
+#include <toml.hpp>
 
 namespace joyctrl
 {
@@ -16,5 +17,6 @@ struct Configuration
     Configuration();
 
     void createFromJSON(const nlohmann::json &j);
+    void createFromTOML(const toml::value &table);
 };
-}
+} // namespace joyctrl

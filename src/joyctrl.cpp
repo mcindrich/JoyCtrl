@@ -11,6 +11,7 @@
 #include <toml.hpp>
 #include <argparse/argparse.hpp>
 #include <stdexcept>
+#include <toml/exception.hpp>
 #include <toml/value.hpp>
 
 static std::optional<std::string> readFile(const std::string &path);
@@ -48,53 +49,18 @@ int main(int arg_n, char *args[])
 
     // 3: load and parse config
     auto config_data = readFile(config_path);
-    // if (config_data.has_value())
-    // {
-    //     try
-    //     {
-    //         const auto j = nlohmann::json::parse(config_data.value());
-    //         configuration.createFromJSON(j);
-    //     }
-    //     catch (const nlohmann::json::parse_error e)
-    //     {
-    //         std::cerr << "Unable to parse configuration file \'" << config_path << "\': " << e.what() << std::endl;
-    //         return -1;
-    //     }
-    // }
-    // else
-    // {
-    //     joyctrl::log::error("unable to read file \'%s\'", config_path.c_str());
-    //     return -1;
-    // }
 
-    // auto toml_data = toml::parse(config_path);
+    try
+    {
+        auto toml_data = toml::parse(config_path);
 
-    // auto apps = toml::find(toml_data, "apps");
-    // for (auto &app : apps.as_array())
-    // {
-    //     std::cout << "App: " << toml::find<std::string>(app, "name") << std::endl;
-    //     std::cout << "App regexes" << std::endl;
-
-    //     for (auto &reg : toml::find<toml::array>(app, "regex"))
-    //     {
-    //         std::cout << "\t Regex: " << toml::find<std::string>(reg, "regex") << std::endl;
-    //         std::cout << "\t Regex buttons:" << std::endl;
-    //         for (auto &button : toml::find<toml::array>(reg, "buttons"))
-    //         {
-    //             std::cout << "\t\t Button: " << toml::find<std::string>(button, "combination") << std::endl;
-
-    //             for (auto &action : toml::find<toml::array>(button, "actions"))
-    //             {
-    //                 std::cout << "\t\t\t Action: " << toml::find<std::string>(action, "name") << std::endl;
-    //                 std::cout << "\t\t\t Params: " << toml::find<toml::array>(action, "params").at(0).as_string()
-    //                           << std::endl;
-    //             }
-    //         }
-    //     }
-    // }
-
-    // after creating the configuration -> init the joystick handler and run it on the provided index
-    // joystick_handler.runOnIndex(joystick_index, configuration);
+        configuration.createFromTOML(toml_data);
+    }
+    catch (const std::runtime_error &error)
+    {
+        std::cout << error.what() << std::endl;
+        return -1;
+    }
 
     return 0;
 }

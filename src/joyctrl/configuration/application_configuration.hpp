@@ -6,6 +6,7 @@
 #include <regex>
 
 #include <nlohmann/json.hpp>
+#include <toml.hpp>
 
 #include <list>
 
@@ -17,6 +18,7 @@ class ApplicationConfiguration
 {
   public:
     ApplicationConfiguration(const nlohmann::json &j);
+    ApplicationConfiguration(const toml::value &t);
 
     bool searchRegex(const std::string &str);
 
