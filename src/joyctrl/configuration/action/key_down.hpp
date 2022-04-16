@@ -18,6 +18,6 @@ class KeyDown : public Action
   private:
     VirtualKey mKey;
 };
-}
-}
-}
+} // namespace action
+} // namespace config
+} // namespace joyctrl

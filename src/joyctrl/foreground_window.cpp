@@ -16,10 +16,14 @@ std::string ForegroundWindow::getWindowTitle() const
     std::string title;
     char title_buffer[2048] = {0};
 
+#ifdef WIN32
+
     if (GetWindowText(mForegroundWindowHandle, title_buffer, sizeof(title_buffer)) > 0)
     {
         title = title_buffer;
     }
+
+#endif
 
     return title;
 }
@@ -28,6 +32,8 @@ std::string ForegroundWindow::getWindowExe() const
 {
     std::string exe;
     char exe_buffer[2048] = {0};
+
+#ifdef WIN32
     DWORD process_id = 0;
     DWORD chars_written = sizeof(exe_buffer);
     HANDLE process_handle = nullptr;
@@ -41,6 +47,8 @@ std::string ForegroundWindow::getWindowExe() const
     {
         exe = exe_buffer;
     }
+
+#endif
 
     return exe;
 }

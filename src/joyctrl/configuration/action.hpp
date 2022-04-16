@@ -13,6 +13,8 @@ class Action
 {
   public:
     virtual void start(ForegroundWindow &fg_window) = 0;
+
+    virtual ~Action() = default;
 };
-}
-}
+} // namespace config
+} // namespace joyctrl

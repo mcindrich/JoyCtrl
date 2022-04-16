@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstdint>
 #ifdef _WIN32
 #include <windows.h>
 #include <xinput.h>
@@ -14,24 +15,122 @@ namespace joyctrl
 // abstract representation of a joystick - both on windows and unix machines
 enum class JoystickButton
 {
-    DPadUp = XINPUT_GAMEPAD_DPAD_UP,
-    DPadDown = XINPUT_GAMEPAD_DPAD_DOWN,
-    DPadLeft = XINPUT_GAMEPAD_DPAD_LEFT,
-    DPadRight = XINPUT_GAMEPAD_DPAD_RIGHT,
-    Start = XINPUT_GAMEPAD_START,
-    Back = XINPUT_GAMEPAD_BACK,
-    LS = XINPUT_GAMEPAD_LEFT_THUMB,
-    RS = XINPUT_GAMEPAD_RIGHT_THUMB,
-    LB = XINPUT_GAMEPAD_LEFT_SHOULDER,
-    RB = XINPUT_GAMEPAD_RIGHT_SHOULDER,
-    A = XINPUT_GAMEPAD_A,
-    B = XINPUT_GAMEPAD_B,
-    X = XINPUT_GAMEPAD_X,
-    Y = XINPUT_GAMEPAD_Y,
+    DPadUp =
+#ifdef WIN32
+
+        XINPUT_GAMEPAD_DPAD_UP
+#else
+        0
+#endif
+    ,
+    DPadDown =
+#ifdef WIN32
+
+        XINPUT_GAMEPAD_DPAD_DOWN
+#else
+        0
+#endif
+    ,
+    DPadLeft =
+#ifdef WIN32
+
+        XINPUT_GAMEPAD_DPAD_LEFT
+#else
+        0
+#endif
+    ,
+    DPadRight =
+#ifdef WIN32
+
+        XINPUT_GAMEPAD_DPAD_RIGHT
+#else
+        0
+#endif
+    ,
+    Start =
+#ifdef WIN32
+
+        XINPUT_GAMEPAD_START
+#else
+        0
+#endif
+    ,
+    Back =
+#ifdef WIN32
+
+        XINPUT_GAMEPAD_BACK
+#else
+        0
+#endif
+    ,
+    LS =
+#ifdef WIN32
+
+        XINPUT_GAMEPAD_LEFT_THUMB
+#else
+        0
+#endif
+    ,
+    RS =
+#ifdef WIN32
+
+        XINPUT_GAMEPAD_RIGHT_THUMB
+#else
+        0
+#endif
+    ,
+    LB =
+#ifdef WIN32
+
+        XINPUT_GAMEPAD_LEFT_SHOULDER
+#else
+        0
+#endif
+    ,
+    RB =
+#ifdef WIN32
+
+        XINPUT_GAMEPAD_RIGHT_SHOULDER
+#else
+        0
+#endif
+    ,
+    A =
+#ifdef WIN32
+
+        XINPUT_GAMEPAD_A
+#else
+        0
+#endif
+    ,
+    B =
+#ifdef WIN32
+
+        XINPUT_GAMEPAD_B
+#else
+        0
+#endif
+    ,
+    X =
+#ifdef WIN32
+
+        XINPUT_GAMEPAD_X
+#else
+        0
+#endif
+    ,
+    Y =
+#ifdef WIN32
+
+        XINPUT_GAMEPAD_Y
+#else
+        0
+#endif
+    ,
 };
 
 // LT RT
-using AnalogTriggerPair = std::pair<byte, byte>;
+using AnalogTriggerPair = std::pair<std::uint8_t, std::uint8_t>;
 
 // LX LY, RX RY
 using AnalogStickPair = std::pair<std::pair<short, short>, std::pair<short, short>>;

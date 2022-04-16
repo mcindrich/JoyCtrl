@@ -7,6 +7,8 @@
 
 #include <nlohmann/json.hpp>
 
+#include <list>
+
 namespace joyctrl
 {
 namespace config
@@ -29,5 +31,5 @@ class ApplicationConfiguration
 
     std::list<ButtonConfiguration> mButtonConfigurations;
 };
-}
+} // namespace config
 } // namespace joyctrl

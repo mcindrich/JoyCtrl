@@ -159,4 +159,4 @@ void ButtonCombination::printNode(const std::shared_ptr<AST::Node> &node, int in
     }
 }
 } // namespace config
-}
+} // namespace joyctrl

@@ -8,8 +8,9 @@ namespace joyctrl
 {
 namespace utils
 {
-template <int N_DELIMS>
-static inline std::vector<std::string> splitStringByDelimiters(const std::string &str, std::array<char, N_DELIMS> delims)
+template <size_t N_DELIMS>
+static inline std::vector<std::string> splitStringByDelimiters(const std::string &str,
+                                                               std::array<char, N_DELIMS> delims)
 {
     size_t curr_index = 0;
     size_t last_index = 0;
@@ -46,5 +47,5 @@ static inline std::vector<std::string> splitStringByDelimiters(const std::string
 
     return tokens;
 }
-}
-}
+} // namespace utils
+} // namespace joyctrl
