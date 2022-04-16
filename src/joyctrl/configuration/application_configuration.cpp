@@ -12,21 +12,6 @@ namespace joyctrl
 {
 namespace config
 {
-ApplicationConfiguration::ApplicationConfiguration(const nlohmann::json &j)
-{
-    const auto configuration_obj = j["configuration"];
-    ActionParser action_parser;
-
-    mComment = j["comment"];
-    mRegexString = j["regex"].get<std::string>();
-    mRegex = std::regex(mRegexString);
-
-    for (auto &iter : configuration_obj["button_combinations"])
-    {
-        mButtonConfigurations.push_back(ButtonConfiguration(ButtonCombination(iter["combination"]),
-                                                            action_parser.parseActionString(iter["action"])));
-    }
-}
 ApplicationConfiguration::ApplicationConfiguration(const toml::value &t)
 {
     auto buttons = toml::find<toml::array>(t, "buttons");
@@ -48,7 +33,7 @@ bool ApplicationConfiguration::searchRegex(const std::string &str)
 {
     return std::regex_search(str, mRegex);
 }
-void ApplicationConfiguration::checkCurrentState(Joystick &joystick, ForegroundWindow &fg_window)
+void ApplicationConfiguration::checkCurrentState(ujoy::Joystick &joystick, ForegroundWindow &fg_window)
 {
     // button combinations
     for (auto &button_config : mButtonConfigurations)

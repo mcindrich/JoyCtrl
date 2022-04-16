@@ -7,7 +7,6 @@
 #include <optional>
 
 // libs
-#include <nlohmann/json.hpp>
 #include <toml.hpp>
 #include <argparse/argparse.hpp>
 #include <stdexcept>

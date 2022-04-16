@@ -1,0 +1,3 @@
+[submodule "dependencies/UJoy-cpp"]
+	path = dependencies/UJoy-cpp
+	url = https://github.com/mcindrich/UJoy-cpp

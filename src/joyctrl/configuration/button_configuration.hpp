@@ -14,9 +14,10 @@ struct ButtonConfiguration
     ButtonCombination Combination;
     std::unique_ptr<Action> ActionPtr;
 
-    ButtonConfiguration(ButtonCombination combo, std::unique_ptr<Action> action): Combination(combo), ActionPtr(std::move(action))
+    ButtonConfiguration(ButtonCombination combo, std::unique_ptr<Action> action)
+        : Combination(combo), ActionPtr(std::move(action))
     {
     }
 };
-}
-}
+} // namespace config
+} // namespace joyctrl

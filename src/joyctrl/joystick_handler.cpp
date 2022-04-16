@@ -1,5 +1,4 @@
 #include <joyctrl/joystick_handler.hpp>
-#include <joyctrl/joystick.hpp>
 #include <joyctrl/foreground_window.hpp>
 #include <joyctrl/log.hpp>
 
@@ -10,7 +9,10 @@ JoystickHandler::JoystickHandler()
 }
 void JoystickHandler::runOnIndex(int index, Configuration &config)
 {
-    Joystick joystick(index);
+    ujoy::Joystick joystick;
+
+    joystick.open(index);
+
     ForegroundWindow fg_window;
 
     while (joystick.isConnected())
@@ -18,7 +20,7 @@ void JoystickHandler::runOnIndex(int index, Configuration &config)
         // process current configuration
         const auto exe_full = fg_window.getWindowExe();
         const auto title = fg_window.getWindowTitle();
-        
+
         if (exe_full.size())
         {
             std::string exe;
@@ -34,7 +36,8 @@ void JoystickHandler::runOnIndex(int index, Configuration &config)
                 {
                     if (app_config.searchRegex(title))
                     {
-                        log::debug("matched regex \'%s\' for app %s (window title: %s)", app_config.getRegexString().c_str(), exe.c_str(), title.c_str());
+                        log::debug("matched regex \'%s\' for app %s (window title: %s)",
+                                   app_config.getRegexString().c_str(), exe.c_str(), title.c_str());
                         app_config.checkCurrentState(joystick, fg_window);
                     }
                 }
@@ -53,4 +56,4 @@ void JoystickHandler::runOnIndex(int index, Configuration &config)
         fg_window.refresh();
     }
 }
-}
+} // namespace joyctrl

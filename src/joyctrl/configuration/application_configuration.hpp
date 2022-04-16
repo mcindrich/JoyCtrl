@@ -1,7 +1,6 @@
 #pragma once
 
 #include <joyctrl/configuration/button_configuration.hpp>
-#include <joyctrl/joystick.hpp>
 
 #include <regex>
 
@@ -10,6 +9,8 @@
 
 #include <list>
 
+#include <UJoy++.hpp>
+
 namespace joyctrl
 {
 namespace config
@@ -17,12 +18,11 @@ namespace config
 class ApplicationConfiguration
 {
   public:
-    ApplicationConfiguration(const nlohmann::json &j);
     ApplicationConfiguration(const toml::value &t);
 
     bool searchRegex(const std::string &str);
 
-    void checkCurrentState(Joystick &joystick, ForegroundWindow &fg_window);
+    void checkCurrentState(ujoy::Joystick &joystick, ForegroundWindow &fg_window);
 
     const std::string getRegexString() const;
 

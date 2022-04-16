@@ -94,7 +94,7 @@ void ButtonCombination::printAST() const
     log::debug("");
 }
 
-bool ButtonCombination::matchesState(Joystick &joystick) const
+bool ButtonCombination::matchesState(ujoy::Joystick &joystick) const
 {
     return checkNodeState(mRootNode, joystick);
 }
@@ -104,7 +104,7 @@ const std::string ButtonCombination::getCombinationString() const
     return mCombinationString;
 }
 
-bool ButtonCombination::checkNodeState(const std::shared_ptr<AST::Node> &node, Joystick &joystick) const
+bool ButtonCombination::checkNodeState(const std::shared_ptr<AST::Node> &node, ujoy::Joystick &joystick) const
 {
     if (!node)
     {
@@ -129,7 +129,7 @@ bool ButtonCombination::checkNodeState(const std::shared_ptr<AST::Node> &node, J
     else
     {
         std::shared_ptr<AST::ValueNode> value = std::static_pointer_cast<AST::ValueNode>(node);
-        if (joystick.isButtonPressed(value->Button))
+        if (joystick.getButtonState(value->Button))
         {
             log::debug("button \'%s\' pressed", value->Data.c_str());
             return true;

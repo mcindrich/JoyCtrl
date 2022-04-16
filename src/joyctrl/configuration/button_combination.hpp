@@ -1,6 +1,6 @@
 #pragma once
 
-#include <joyctrl/joystick.hpp>
+#include <UJoy++.hpp>
 
 #include <string>
 #include <map>
@@ -41,25 +41,25 @@ struct ComboNode : public Node
 struct ValueNode : public Node
 {
   public:
-    JoystickButton Button;
+    ujoy::Button Button;
 
     ValueNode(std::string data)
     {
-        std::map<std::string, JoystickButton> buttons_map = {
-            {"DPadUp", JoystickButton::DPadUp},
-            {"DPadDown", JoystickButton::DPadDown},
-            {"DPadLeft", JoystickButton::DPadLeft},
-            {"DPadRight", JoystickButton::DPadRight},
-            {"Start", JoystickButton::Start},
-            {"Back", JoystickButton::Back},
-            {"LS", JoystickButton::LS},
-            {"RS", JoystickButton::RS},
-            {"LB", JoystickButton::LB},
-            {"RB", JoystickButton::RB},
-            {"A", JoystickButton::A},
-            {"B", JoystickButton::B},
-            {"X", JoystickButton::X},
-            {"Y", JoystickButton::Y},
+        std::map<std::string, ujoy::Button> buttons_map = {
+            {"DPadUp", ujoy::Button::DPadUp},
+            {"DPadDown", ujoy::Button::DPadDown},
+            {"DPadLeft", ujoy::Button::DPadLeft},
+            {"DPadRight", ujoy::Button::DPadRight},
+            {"Start", ujoy::Button::Start},
+            {"Back", ujoy::Button::Back},
+            {"LS", ujoy::Button::LS},
+            {"RS", ujoy::Button::RS},
+            {"LB", ujoy::Button::LB},
+            {"RB", ujoy::Button::RB},
+            {"A", ujoy::Button::A},
+            {"B", ujoy::Button::B},
+            {"X", ujoy::Button::X},
+            {"Y", ujoy::Button::Y},
         };
 
         Data = data;
@@ -74,13 +74,13 @@ class ButtonCombination
 
     void printAST() const;
 
-    bool matchesState(Joystick &joystick) const;
+    bool matchesState(ujoy::Joystick &joystick) const;
 
     const std::string getCombinationString() const;
 
   private:
     void printNode(const std::shared_ptr<AST::Node> &node, int indent = 0) const;
-    bool checkNodeState(const std::shared_ptr<AST::Node> &node, Joystick &joystick) const;
+    bool checkNodeState(const std::shared_ptr<AST::Node> &node, ujoy::Joystick &joystick) const;
 
     std::shared_ptr<AST::Node> mRootNode;
     std::string mCombinationString;
