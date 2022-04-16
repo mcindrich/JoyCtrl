@@ -1,0 +1,40 @@
+######################################## MSFT Edge 
+
+[[apps]]
+name = "msedge.exe"
+
+[[apps.regex]]
+regex = ".*.pdf"
+comment = "Configuration for browser opened PDF files"
+
+[[apps.regex.buttons]]
+combination = "A"
+[[apps.regex.buttons.actions]]
+name = "KeyDown"
+params = ["Enter"]
+
+[[apps.regex.buttons]]
+combination = "LS+RS"
+[[apps.regex.buttons.actions]]
+name = "KeyDown"
+params = ["F11"]
+
+[[apps.regex.buttons]]
+combination = "DPadUp"
+[[apps.regex.buttons.actions]]
+name = "KeyDown"
+params = ["Up"]
+
+[[apps.regex.buttons]]
+combination = "DPadDown"
+[[apps.regex.buttons.actions]]
+name = "KeyDown"
+params = ["Down"]
+
+[[apps.regex.buttons]]
+combination = "LB"
+[[apps.regex.buttons.actions]]
+name = "KeyDown"
+params = ["VolumeDown"]
+
+########################################
