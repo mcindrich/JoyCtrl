@@ -11,7 +11,7 @@ namespace action
 class KeyDown : public Action
 {
   public:
-    KeyDown(std::vector<std::string> &args);
+    KeyDown(const std::vector<std::string> &params);
 
     void start(ForegroundWindow &fg_window) override;
 

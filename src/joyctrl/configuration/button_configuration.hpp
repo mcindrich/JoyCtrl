@@ -4,6 +4,7 @@
 #include <joyctrl/configuration/action.hpp>
 
 #include <memory>
+#include <list>
 
 namespace joyctrl
 {
@@ -12,10 +13,10 @@ namespace config
 struct ButtonConfiguration
 {
     ButtonCombination Combination;
-    std::unique_ptr<Action> ActionPtr;
+    std::list<std::unique_ptr<Action>> Actions;
 
-    ButtonConfiguration(ButtonCombination combo, std::unique_ptr<Action> action)
-        : Combination(combo), ActionPtr(std::move(action))
+    ButtonConfiguration(ButtonCombination combo, std::list<std::unique_ptr<Action>> &actions)
+        : Combination(combo), Actions(std::move(actions))
     {
     }
 };

@@ -10,6 +10,7 @@
 #include <list>
 
 #include <UJoy++.hpp>
+#include <toml/value.hpp>
 
 namespace joyctrl
 {
@@ -27,6 +28,8 @@ class ApplicationConfiguration
     const std::string getRegexString() const;
 
   private:
+    std::list<std::unique_ptr<Action>> mGetActions(const toml::array &t);
+
     std::string mRegexString;
     std::regex mRegex;
     std::string mComment;

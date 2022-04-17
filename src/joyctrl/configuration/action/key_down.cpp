@@ -9,9 +9,9 @@ namespace config
 {
 namespace action
 {
-KeyDown::KeyDown(std::vector<std::string> &args)
+KeyDown::KeyDown(const std::vector<std::string> &params) : Action(params)
 {
-    std::map<std::string, VirtualKey> keys_map = {
+    const std::map<std::string, VirtualKey> keys_map = {
         {"LButton", VirtualKey::LButton},
         {"RButton", VirtualKey::RButton},
         {"Cancel", VirtualKey::Cancel},
@@ -206,7 +206,10 @@ KeyDown::KeyDown(std::vector<std::string> &args)
         {"OemClear", VirtualKey::OemClear},
     };
 
-    mKey = keys_map[args[2]];
+    if (keys_map.count(mParams[0]) != 0)
+    {
+        mKey = keys_map.at(mParams[0]);
+    }
 }
 
 void KeyDown::start(ForegroundWindow &fg_window)

@@ -33,7 +33,6 @@ add_executable(
     
     "src/joyctrl/configuration/button_combination.cpp" 
     
-    "src/joyctrl/configuration/action_parser.cpp" 
     "src/joyctrl/foreground_window.cpp"
 
     "src/joyctrl/configuration/action/key_down.cpp"

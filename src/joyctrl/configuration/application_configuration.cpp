@@ -1,10 +1,11 @@
-#include "joyctrl/configuration/button_combination.hpp"
-#include "joyctrl/configuration/button_configuration.hpp"
+#include <joyctrl/configuration/button_combination.hpp>
+#include <joyctrl/configuration/button_configuration.hpp>
 #include <joyctrl/configuration/application_configuration.hpp>
-#include <joyctrl/configuration/action_parser.hpp>
+#include <joyctrl/configuration/action/key_down.hpp>
 #include <joyctrl/log.hpp>
 
 #include <iostream>
+#include <memory>
 #include <regex>
 #include <toml/value.hpp>
 
@@ -15,7 +16,6 @@ namespace config
 ApplicationConfiguration::ApplicationConfiguration(const toml::value &t)
 {
     auto buttons = toml::find<toml::array>(t, "buttons");
-    ActionParser action_parser;
 
     mComment = toml::find<std::string>(t, "comment");
     mRegexString = toml::find<std::string>(t, "regex");
@@ -24,9 +24,11 @@ ApplicationConfiguration::ApplicationConfiguration(const toml::value &t)
     for (auto &button : buttons)
     {
         // for now only add first action
-        mButtonConfigurations.push_back(ButtonConfiguration(
-            ButtonCombination(toml::find<std::string>(button, "combination")),
-            action_parser.parseActionString(toml::get<std::string>(toml::find<toml::array>(button, "actions").at(0)))));
+        const auto combination = ButtonCombination(toml::find<std::string>(button, "combination"));
+        const auto toml_actions = toml::find<toml::array>(button, "actions");
+        auto actions = mGetActions(toml_actions);
+
+        mButtonConfigurations.push_back(ButtonConfiguration(combination, actions));
     }
 }
 bool ApplicationConfiguration::searchRegex(const std::string &str)
@@ -42,9 +44,9 @@ void ApplicationConfiguration::checkCurrentState(ujoy::Joystick &joystick, Foreg
         {
             log::debug("combination \'%s\' matched - executing action from the configuration file",
                        button_config.Combination.getCombinationString().c_str());
-            if (button_config.ActionPtr)
+            for (auto &action : button_config.Actions)
             {
-                button_config.ActionPtr->start(fg_window);
+                action->start(fg_window);
             }
         }
     }
@@ -56,6 +58,23 @@ void ApplicationConfiguration::checkCurrentState(ujoy::Joystick &joystick, Foreg
 const std::string ApplicationConfiguration::getRegexString() const
 {
     return mRegexString;
+}
+std::list<std::unique_ptr<Action>> ApplicationConfiguration::mGetActions(const toml::array &t)
+{
+    std::list<std::unique_ptr<Action>> actions;
+
+    for (auto &a : t)
+    {
+        const auto name = toml::find<std::string>(a, "name");
+        const auto params = toml::find<std::vector<std::string>>(a, "params");
+
+        if (name == "KeyDown")
+        {
+            actions.push_back(std::make_unique<action::KeyDown>(params));
+        }
+    }
+
+    return actions;
 }
 } // namespace config
 } // namespace joyctrl
